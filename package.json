@@ -16,7 +16,6 @@
     "jquery": "2.1.4",
     "less": "2.6.0",
     "less-plugin-clean-css": "1.5.1",
-    "lodash": "3.10.1",
     "mousetrap": "1.5.3",
     "uglify-js": "2.6.1"
   },

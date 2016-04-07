@@ -1,5 +1,4 @@
 var $ = require('jquery');
-var _ = require('lodash');
 
 var storage = require('./storage');
 var platform = require('./platform');
@@ -41,7 +40,7 @@ function filterSummary(paths) {
 
     $summary.find('li').each(function() {
         var path = $(this).data('path');
-        var st = paths == null || _.contains(paths, path);
+        var st = paths == null || paths.indexOf(path) !== -1;
 
         $(this).toggle(st);
         if (st) $(this).parents('li').show();

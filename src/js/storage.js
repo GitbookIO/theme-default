@@ -14,7 +14,7 @@ module.exports = {
 
         try {
             localStorage[key] = JSON.stringify(value);
-        } catch(e) {}
+        } catch(e) {}   // eslint-disable-line no-empty
     },
 
     // Read a value from localstorage
@@ -23,7 +23,7 @@ module.exports = {
         if (localStorage === undefined || localStorage[key] === undefined) return def;
         try {
             var v = JSON.parse(localStorage[key]);
-            return v == null ? def : v;;
+            return v == null ? def : v;
         } catch(err) {
             return localStorage[key] || def;
         }

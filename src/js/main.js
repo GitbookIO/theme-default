@@ -1,5 +1,4 @@
 var $ = require('jquery');
-var _ = require('lodash');
 
 var storage = require('./storage');
 var dropdown = require('./dropdown');
@@ -60,15 +59,14 @@ var gitbook = {
 // Modules mapping for plugins
 var MODULES = {
     'gitbook': gitbook,
-    'jquery': $,
-    'lodash': _
+    'jquery': $
 };
 
 window.gitbook = gitbook;
 window.$ = $;
 window.jQuery = $;
 window.require = function(mods, fn) {
-    mods = _.map(mods, function(mod) {
+    mods = mods.map(function(mod) {
         mod = mod.toLowerCase();
         if (!MODULES[mod]) {
             throw new Error('GitBook module '+mod+' doesn\'t exist');
