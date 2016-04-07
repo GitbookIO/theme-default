@@ -1,4 +1,4 @@
-var state = require('./state');
+var state = require('../core').state;
 
 function showLoading(p) {
     state.$book.addClass('is-loading');

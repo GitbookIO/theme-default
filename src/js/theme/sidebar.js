@@ -1,8 +1,8 @@
 var $ = require('jquery');
 
-var storage = require('./storage');
+var storage  = require('../core').storage;
+var state    = require('../core').state;
 var platform = require('./platform');
-var state = require('./state');
 
 
 // Toggle sidebar with or withour animation

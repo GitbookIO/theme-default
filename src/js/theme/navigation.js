@@ -1,8 +1,8 @@
 var $ = require('jquery');
 var url = require('url');
 
-var events = require('./events');
-var state = require('./state');
+var events  = require('../core').events;
+var state   = require('../core').state;
 var loading = require('./loading');
 
 

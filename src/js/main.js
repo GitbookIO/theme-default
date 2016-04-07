@@ -1,65 +1,39 @@
 var $ = require('jquery');
 
-var storage = require('./storage');
-var dropdown = require('./dropdown');
-var events = require('./events');
-var state = require('./state');
-var keyboard = require('./keyboard');
-var navigation = require('./navigation');
-var sidebar = require('./sidebar');
-var toolbar = require('./toolbar');
+var storage = require('./core').storage;
+var events  = require('./core').events;
+var state   = require('./core').state;
 
+var theme = require('./theme');
 
 function start(config) {
-    // Init sidebar
-    sidebar.init();
-
-    // Init keyboard
-    keyboard.init();
-
-    // Bind dropdown
-    dropdown.init();
-
-    // Init navigation
-    navigation.init();
-
-
-    // Add action to toggle sidebar
-    toolbar.createButton({
-        index: 0,
-        icon: 'fa fa-align-justify',
-        onClick: function(e) {
-            e.preventDefault();
-            sidebar.toggle();
-        }
-    });
-
+    theme.init();
     events.trigger('start', config);
-    navigation.notify();
+    theme.navigation.notify();
 }
 
 // Export APIs for plugins
 var gitbook = {
-    start: start,
+    start:  start,
     events: events,
-    state: state,
-
-    // UI sections
-    toolbar: toolbar,
-    sidebar: sidebar,
+    state:  state,
 
     // Read/Write the localstorage
     storage: storage,
 
+    // UI sections
+    toolbar: theme.toolbar,
+    sidebar: theme.sidebar,
+
     // Create keyboard shortcuts
-    keyboard: keyboard
+    keyboard: theme.keyboard
 };
 
 
 // Modules mapping for plugins
 var MODULES = {
     'gitbook': gitbook,
-    'jquery': $
+    'jquery':  $
 };
 
 window.gitbook = gitbook;
