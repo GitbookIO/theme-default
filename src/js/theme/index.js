@@ -4,6 +4,8 @@ var navigation = require('./navigation');
 var sidebar =    require('./sidebar');
 var toolbar =    require('./toolbar');
 
+var gitbook = window.gitbook;
+
 function init() {
     // Init sidebar
     sidebar.init();
@@ -26,12 +28,13 @@ function init() {
             sidebar.toggle();
         }
     });
+
+    navigation.notify();
 }
 
-module.exports = {
-    init:       init,
-    keyboard:   require('./keyboard'),
-    navigation: require('./navigation'),
-    sidebar:    require('./sidebar'),
-    toolbar:    require('./toolbar')
-};
+gitbook.events.on('start', init);
+
+gitbook.keyboard = keyboard;
+gitbook.navigation = navigation;
+gitbook.sidebar = sidebar;
+gitbook.toolbar = toolbar;

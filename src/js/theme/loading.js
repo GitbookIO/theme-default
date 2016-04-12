@@ -1,4 +1,4 @@
-var state = require('../core').state;
+var state = gitbook.state;
 
 function showLoading(p) {
     state.$book.addClass('is-loading');

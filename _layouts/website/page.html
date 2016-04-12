@@ -15,7 +15,8 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ "app.js"|resolveAsset }}"></script>
+    <script src="{{ "gitbook.js"|resolveAsset }}"></script>
+    <script src="{{ "theme.js"|resolveAsset }}"></script>
     {% for resource in plugins.resources.js %}
         {% if resource.url %}
         <script src="{{ resource.url }}"></script>
@@ -23,11 +24,6 @@
         <script src="{{ resource.path|resolveAsset }}"></script>
         {% endif %}
     {% endfor %}
-    <script>
-    require(["gitbook"], function(gitbook) {
-        gitbook.start({{ config.pluginsConfig|dump|safe }});
-    });
-    </script>
 {% endblock %}
 
 {% block body %}
@@ -108,6 +104,15 @@
         {% endblock %}
     {% endblock %}
     </div>
+
+    <script>
+    (function() {
+        gitbook.page.hasChanged({
+            page: {{ page|dump|safe }},
+            config: {{ config|dump|safe }},
+        })
+    })();
+    </script>
 </div>
 {% endblock %}
 

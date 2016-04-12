@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
-var storage  = require('../core').storage;
-var state    = require('../core').state;
+var storage  = gitbook.storage;
+var state    = gitbook.state;
 var platform = require('./platform');
 
 

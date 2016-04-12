@@ -1,10 +1,9 @@
 var $ = require('jquery');
 var url = require('url');
 
-var events  = require('../core').events;
-var state   = require('../core').state;
 var loading = require('./loading');
 
+var state   = gitbook.state;
 
 var usePushState = (typeof history.pushState !== 'undefined');
 
@@ -75,10 +74,6 @@ function updateNavigationPosition() {
     $('.navigation-next').css('margin-right', (bodyInnerWidth - pageWrapperWidth) + 'px');
 }
 
-function notifyPageChange() {
-    events.trigger('page.change');
-}
-
 function preparePage(notify) {
     var $bookBody = $('.book-body');
     var $bookInner = $bookBody.find('.body-inner');
@@ -93,9 +88,6 @@ function preparePage(notify) {
     // Reset scroll
     $bookInner.scrollTop(0);
     $bookBody.scrollTop(0);
-
-    // Notify
-    if (notify !== false) notifyPageChange();
 }
 
 function isLeftClickEvent(e) {
@@ -160,6 +152,5 @@ function init() {
 module.exports = {
     init: init,
     goNext: goNext,
-    goPrev: goPrev,
-    notify: notifyPageChange
+    goPrev: goPrev
 };

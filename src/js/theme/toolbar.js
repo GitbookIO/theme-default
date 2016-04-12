@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var events = require('../core').events;
+var events = gitbook.events;
 
 // List of created buttons
 var buttons = [];
