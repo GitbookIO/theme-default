@@ -38,9 +38,44 @@
     data-basepath="{{ './'|resolveFile }}"
     data-revision="{{ gitbook.time }}"
     data-innerlanguage="{{ innerlanguage }}">
-    {% include "website/summary.html" %}
+
+    <div class="book-summary">
+        {% block search_input %}{% endblock %}
+        {% block book_summary %}
+        <nav role="navigation">
+            <ul class="summary">
+                {% set _divider = false %}
+                {% if config.links.sidebar  %}
+                {% for linkTitle, link in config.links.sidebar  %}
+                    {% set _divider = true %}
+                    <li>
+                        <a href="{{ link }}" target="_blank" class="custom-link">{{ linkTitle }}</a>
+                    </li>
+                {% endfor %}
+                {% endif %}
+
+                {% if _divider %}
+                <li class="divider"></li>
+                {% endif %}
+
+
+                {% for part in summary.parts %}
+                {{ articles(part.articles, file) }}
+                <li class="divider"></li>
+                {% endfor %}
+
+                <li>
+                    <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                        {{ "GITBOOK_LINK"|t }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        {% endblock %}
+    </div>
 
     <div class="book-body">
+    {% block search_results %}
         {% block book_body %}
             <div class="body-inner">
                 {% block book_inner %}
@@ -71,6 +106,36 @@
                 {% endif %}
             {% endblock %}
         {% endblock %}
+    {% endblock %}
     </div>
 </div>
 {% endblock %}
+
+{% macro articles(_articles, file) %}
+    {% for article in _articles %}
+        <li class="chapter {% if article.path == file.path and not article.anchor %}active{% endif %}" data-level="{{ article.level }}" {% if article.path %}data-path="{{ article.path|resolveFile }}"{% endif %}>
+            {% if article.path %}
+                <a href="{{ article.path|resolveFile }}{{ article.anchor }}">
+            {% elif article.url %}
+                <a target="_blank" href="{{ article.url }}">
+            {% else %}
+                <span>
+            {% endif %}
+                    {% if article.level != "0" %}
+                        <b>{{ article.level }}.</b>
+                    {% endif %}
+                    {{ article.title }}
+            {% if article.path  or article.url %}
+                </a>
+            {% else %}
+                </span>
+            {% endif %}
+
+            {% if article.articles.length > 0 %}
+            <ul class="articles">
+                {{ articles(article.articles, file) }}
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
