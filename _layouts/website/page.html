@@ -71,7 +71,6 @@
     </div>
 
     <div class="book-body">
-    {% block search_results %}
         {% block book_body %}
             <div class="body-inner">
                 {% block book_inner %}
@@ -79,11 +78,13 @@
 
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
-                            <section class="normal markdown-section">
-                            {% block page %}
-                            {{ page.content|safe }}
+                            {% block search_results %}
+                                <section class="normal markdown-section">
+                                {% block page %}
+                                {{ page.content|safe }}
+                                {% endblock %}
+                                </section>
                             {% endblock %}
-                            </section>
                         </div>
                     </div>
                 {% endblock %}
@@ -102,7 +103,6 @@
                 {% endif %}
             {% endblock %}
         {% endblock %}
-    {% endblock %}
     </div>
 
     <script>
