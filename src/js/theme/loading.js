@@ -1,9 +1,9 @@
-var state = gitbook.state;
+var gitbook = window.gitbook;
 
 function showLoading(p) {
-    state.$book.addClass('is-loading');
+    gitbook.state.$book.addClass('is-loading');
     p.always(function() {
-        state.$book.removeClass('is-loading');
+        gitbook.state.$book.removeClass('is-loading');
     });
 
     return p;

@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var events = gitbook.events;
+var gitbook = window.gitbook;
 
 // List of created buttons
 var buttons = [];
@@ -171,7 +171,7 @@ function updateAllButtons() {
 }
 
 // When page changed, reset buttons
-events.bind('page.change', function() {
+gitbook.events.on('page.change', function() {
     updateAllButtons();
 });
 

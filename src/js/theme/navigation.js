@@ -3,8 +3,6 @@ var url = require('url');
 
 var loading = require('./loading');
 
-var state   = gitbook.state;
-
 var usePushState = (typeof history.pushState !== 'undefined');
 
 function handleNavigation(relativeUrl, push) {
@@ -58,7 +56,6 @@ function handleNavigation(relativeUrl, push) {
         $('.book-summary .summary').scrollTop(scrollPosition);
 
         // Update state
-        state.update($('html'));
         preparePage();
     })
     .fail(function (e) {
@@ -74,7 +71,7 @@ function updateNavigationPosition() {
     $('.navigation-next').css('margin-right', (bodyInnerWidth - pageWrapperWidth) + 'px');
 }
 
-function preparePage(notify) {
+function preparePage() {
     var $bookBody = $('.book-body');
     var $bookInner = $bookBody.find('.body-inner');
     var $pageWrapper = $bookInner.find('.page-wrapper');

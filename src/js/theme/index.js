@@ -28,8 +28,6 @@ function init() {
             sidebar.toggle();
         }
     });
-
-    navigation.notify();
 }
 
 gitbook.events.on('start', init);
