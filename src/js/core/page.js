@@ -2,10 +2,9 @@ var $ = require('jquery');
 var url = require('url');
 var path = require('path');
 var events = require('./events');
+
 var started = false;
-
 var state = {};
-
 
 /*
     Signal that page has changed, this function must be called by
@@ -18,7 +17,7 @@ function hasChanged(ctx) {
     if (!started) {
         // Notify that gitbook is ready
         started = true;
-        events.trigger('start', ctx.config);
+        events.trigger('start', ctx.config.pluginsConfig);
     }
 
     events.trigger('page.change');
