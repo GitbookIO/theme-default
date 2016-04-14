@@ -139,6 +139,8 @@ function init() {
     $(document).on('click', '.navigation-prev', handlePagination);
     $(document).on('click', '.navigation-next', handlePagination);
     $(document).on('click', '.summary [data-path] a', handlePagination);
+    // Handle for search
+    $(document).on('click', '.search-results-item a', handlePagination);
 
     $(window).resize(updateNavigationPosition);
 
