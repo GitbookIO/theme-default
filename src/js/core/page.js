@@ -35,18 +35,18 @@ data-level="{{ page.level }}"
 */
 function setState(newState) {
     // API since GitBook v3
-    state.page = newState.page;
-    state.file = newState.file;
-    state.gitbook = newState.gitbook;
-    state.config = newState.config;
-    state.basePath = newState.basePath;
+    state.page          = newState.page;
+    state.file          = newState.file;
+    state.gitbook       = newState.gitbook;
+    state.config        = newState.config;
+    state.basePath      = newState.basePath;
+    state.innerLanguage = newState.innerLanguage;
 
     // Deprecated
-    state.$book = $('.book');
-    state.innerLanguage = ''; // todo
-    state.revision = state.gitbook.time;
-    state.level = state.page.level;
-    state.filepath = state.file.path;
+    state.$book        = $('.book');
+    state.revision     = state.gitbook.time;
+    state.level        = state.page.level;
+    state.filepath     = state.file.path;
     state.chapterTitle = state.page.title;
 
     // Absolute url to the root of the book (inner book)
