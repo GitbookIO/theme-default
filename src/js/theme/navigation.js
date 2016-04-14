@@ -2,6 +2,7 @@ var $ = require('jquery');
 var url = require('url');
 
 var loading = require('./loading');
+var gitbook = window.gitbook;
 
 var usePushState = (typeof history.pushState !== 'undefined');
 
@@ -56,6 +57,7 @@ function handleNavigation(relativeUrl, push) {
         $('.book-summary .summary').scrollTop(scrollPosition);
 
         // Update state
+        gitbook.state.$book = $('.book');
         preparePage();
     })
     .fail(function (e) {
