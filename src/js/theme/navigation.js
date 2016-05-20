@@ -33,6 +33,18 @@ function scrollToHash(hash) {
     $scroller.animate({
         scrollTop: dest
     }, 800, 'swing');
+
+    // Update summary active chapter
+    $('.book-summary').find('.chapter.active').removeClass('active');
+    $('.book-summary .chapter > a').each(function() {
+        var uri = url.resolve(window.location.pathname, $(this).attr('href')),
+            windowLocation = window.location.pathname + window.location.hash;
+
+        // Same page
+        if (uri == windowLocation) {
+            $(this).parent('.chapter').addClass('active');
+        }
+    });
 }
 
 /*
