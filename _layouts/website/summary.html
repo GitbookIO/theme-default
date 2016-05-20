@@ -1,5 +1,6 @@
 {% macro articles(_articles) %}
     {% for article in _articles %}
+        {% set articlePage = getPageByPath(article.path) %}
         <li class="chapter {% if article.path == file.path and not article.anchor %}active{% endif %}" data-level="{{ article.level }}" {% if article.path %}data-path="{{ article.path|resolveFile }}"{% endif %}>
             {% if article.path %}
                 <a href="{{ article.path|resolveFile }}{{ article.anchor }}">
@@ -16,6 +17,14 @@
                 </a>
             {% else %}
                 </span>
+            {% endif %}
+
+            {% if articlePage.tags %}
+            <ul class="chapter-tags">
+            {% for tag in articlePage.tags %}
+                <li class="chapter-tag">{{ tag }}</li>
+            {% endfor %}
+            </ul>
             {% endif %}
 
             {% if article.articles.length > 0 %}
