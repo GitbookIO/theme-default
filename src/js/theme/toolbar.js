@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var shortid = require('shortid');
 
 var gitbook = window.gitbook;
 
@@ -97,11 +98,16 @@ function createButton(opts) {
         dropdown: null,
 
         // Position in the toolbar
-        index: null
+        index: null,
+
+        // Button id for removal
+        id: shortid.generate()
     }, opts || {});
 
     buttons.push(opts);
     updateButton(opts);
+
+    return opts.id;
 }
 
 // Update a button
@@ -170,11 +176,31 @@ function updateAllButtons() {
     buttons.forEach(updateButton);
 }
 
+// Remove a button provided its id
+function removeButton(id) {
+    buttons = $.grep(buttons, function(button) {
+        return button.id != id;
+    });
+
+    updateAllButtons();
+}
+
+// Remove multiple buttons from an array of ids
+function removeButtons(ids) {
+    buttons = $.grep(buttons, function(button) {
+        return ids.indexOf(button.id) == -1;
+    });
+
+    updateAllButtons();
+}
+
 // When page changed, reset buttons
 gitbook.events.on('page.change', function() {
     updateAllButtons();
 });
 
 module.exports = {
-    createButton: createButton
+    createButton: createButton,
+    removeButton: removeButton,
+    removeButtons: removeButtons
 };

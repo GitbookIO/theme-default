@@ -18,6 +18,7 @@
     "less": "2.6.0",
     "less-plugin-clean-css": "1.5.1",
     "mousetrap": "1.5.3",
+    "shortid": "2.2.6",
     "uglify-js": "2.6.1"
   },
   "scripts": {
