@@ -1,10 +1,15 @@
 var $ = require('jquery');
-var shortid = require('shortid');
 
 var gitbook = window.gitbook;
 
 // List of created buttons
-var buttons = [];
+var buttons = [],
+// Generated Id for buttons
+    BTN_ID = 0;
+
+function generateId() {
+    return 'btn-'+(BTN_ID++);
+}
 
 // Insert a jquery element at a specific position
 function insertAt(parent, selector, index, element) {
@@ -101,7 +106,7 @@ function createButton(opts) {
         index: null,
 
         // Button id for removal
-        id: shortid.generate()
+        id: generateId()
     }, opts || {});
 
     buttons.push(opts);
