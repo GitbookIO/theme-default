@@ -65,7 +65,6 @@ function handleNavigation(relativeUrl, push) {
     }
 
     prevUri = uri;
-    uri = './plugins'; //
 
     var promise = $.Deferred(function(deferred) {
         $.ajax({
@@ -73,11 +72,11 @@ function handleNavigation(relativeUrl, push) {
             url: uri,
             cache: true,
             headers:{
-                'Access-Control-Expose-Headers': 'Location'
+                'Access-Control-Expose-Headers': 'X-Current-Location'
             },
             success: function(html, status, xhr) {
-                console.log(xhr, xhr.getAllResponseHeaders());
-                alert('responseURL:' + xhr.responseURL);
+                // For GitBook.com, we handle redirection signaled by the server
+                var responseURL = xhr.getResponseHeader('X-Current-Location') || uri;
 
                 // Replace html content
                 html = html.replace( /<(\/?)(html|head|body)([^>]*)>/ig, function(a,b,c,d){
@@ -97,8 +96,8 @@ function handleNavigation(relativeUrl, push) {
                 // Push url to history
                 if (push) {
                     history.pushState({
-                        path: uri
-                    }, null, uri);
+                        path: responseURL
+                    }, null, responseURL);
                 }
 
                 // Merge heads
