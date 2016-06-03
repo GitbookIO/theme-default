@@ -30,11 +30,17 @@ function scrollToHash(hash) {
         dest = getElementTopPosition(hash);
     }
 
+    // Unbind scroll detection
+    $scroller.unbind('scroll');
     $scroller.animate({
         scrollTop: dest
-    }, 800, 'swing');
+    }, 800, 'swing', function() {
+        // Reset scroll binding when finished
+        $scroller.scroll(handleScrolling);
+    });
 
-    handleScrolling();
+    // Directly set chapter as active
+    setChapterActive(null, hash);
 }
 
 /*
@@ -61,58 +67,100 @@ function getElementTopPosition(id) {
     return Math.floor(dest);
 }
 
+
 /*
     Handle updating summary at scrolling
 */
-var $chapters;
+var $chapters,
+    $activeChapter;
+
+// Set a chapter as active in summary and update state
+function setChapterActive($chapter, hash) {
+    // No chapter and no hash means first chapter
+    if (!$chapter && !hash) {
+        $chapter = $chapters.first();
+    }
+
+    // If hash is provided, set as active chapter
+    if (!!hash) {
+        $chapter = $chapters.filter(function() {
+            var titleId = getChapterHash($(this));
+            return titleId == hash;
+        }).first();
+    }
+
+    // Don't update current chapter
+    if ($chapter.is($activeChapter)) {
+        return;
+    }
+
+    // Update current active chapter
+    $activeChapter = $chapter;
+
+    // Add class to selected chapter
+    $chapters.removeClass('active');
+    $chapter.addClass('active');
+
+    // Update history state if needed
+    hash = getChapterHash($chapter);
+
+    var oldUri = window.location.pathname + window.location.hash,
+        uri = window.location.pathname + hash;
+
+    if (uri != oldUri) {
+        history.replaceState({ path: uri }, null, uri);
+    }
+}
+
+// Return the hash of link for a chapter
+function getChapterHash($chapter) {
+    var $link = $chapter.children('a'),
+        hash = $link.attr('href').split('#')[1];
+
+    if (hash) hash = '#'+hash;
+    return (!!hash)? hash : '';
+}
+
+// Handle user scrolling
 function handleScrolling() {
     // Get current page scroll
-    var $scroller    = getScroller(),
-        scrollTop    = $scroller.scrollTop(),
-        scrollHeight = $scroller.prop('scrollHeight'),
-        clientHeight = $scroller.prop('clientHeight'),
-        nbChapters   = $chapters.length,
-        foundChapter = false;
-
-    // Set a chapter as active
-    function setChapterActive($chapter) {
-        foundChapter = true;
-
-        $chapters.removeClass('active');
-        $chapter.addClass('active');
-    }
+    var $scroller      = getScroller(),
+        scrollTop      = $scroller.scrollTop(),
+        scrollHeight   = $scroller.prop('scrollHeight'),
+        clientHeight   = $scroller.prop('clientHeight'),
+        nbChapters     = $chapters.length,
+        $chapter       = null;
 
     // Find each title position in reverse order
     $($chapters.get().reverse()).each(function(index) {
-        var $link   = $(this).children('a'),
-            titleId = $link.attr('href').split('#')[1],
+        var titleId = getChapterHash($(this)),
             titleTop;
 
-        if (!!titleId) titleId = '#'+titleId;
-
-        if (!!titleId && !foundChapter) {
+        if (!!titleId && !$chapter) {
             titleTop = getElementTopPosition(titleId);
 
             // Set current chapter as active if scroller passed it
             if (scrollTop >= titleTop) {
-                setChapterActive($(this));
+                $chapter = $(this);
             }
         }
-        // If not found at first chapter, set as active
-        if (index == (nbChapters - 1) && !foundChapter) {
-            setChapterActive($(this));
+        // If no active chapter when reaching first chapter, set it as active
+        if (index == (nbChapters - 1) && !$chapter) {
+            $chapter = $(this);
         }
     });
 
     // ScrollTop is at 0, set first chapter anyway
-    if (!foundChapter && !scrollTop) {
-        setChapterActive($chapters.first());
+    if (!$chapter && !scrollTop) {
+        $chapter = $chapters.first();
     }
 
-    // Finally, set last chapter at the bottom of page
+    // Set last chapter as active if scrolled to bottom of page
     if (!!scrollTop && (scrollHeight - scrollTop == clientHeight)) {
-        setChapterActive($chapters.last());
+        $chapter = $chapters.last();
     }
+
+    setChapterActive($chapter);
 }
 
 /*
@@ -244,16 +292,13 @@ function preparePage(resetScroll) {
             href =  $link.attr('href').split('#')[0];
 
         var resolvedRef = url.resolve(window.location.pathname, href);
-
         return window.location.pathname == resolvedRef;
     });
 
     // Bind scrolling if summary contains more than one link to this page
     var $scroller = getScroller();
     if ($chapters.length > 1) {
-        $scroller.scroll(function(e) {
-            handleScrolling($chapters);
-        });
+        $scroller.scroll(handleScrolling);
     }
 }
 
