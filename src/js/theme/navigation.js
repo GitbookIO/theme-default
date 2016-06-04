@@ -289,7 +289,15 @@ function preparePage(resetScroll) {
     $chapters = $('.book-summary .summary .chapter')
     .filter(function() {
         var $link = $(this).children('a'),
-            href =  $link.attr('href').split('#')[0];
+            href  = null;
+
+        // Chapter doesn't have a link
+        if (!$link.length) {
+            return false;
+        }
+        else {
+            href = $link.attr('href').split('#')[0];
+        }
 
         var resolvedRef = url.resolve(window.location.pathname, href);
         return window.location.pathname == resolvedRef;
