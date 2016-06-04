@@ -268,6 +268,12 @@ function updateNavigationPosition() {
     bodyInnerWidth = parseInt($('.body-inner').css('width'), 10);
     pageWrapperWidth = parseInt($('.page-wrapper').css('width'), 10);
     $('.navigation-next').css('margin-right', (bodyInnerWidth - pageWrapperWidth) + 'px');
+
+    // Reset scroll to get current scroller
+    var $scroller = getScroller();
+    // Unbind existing scroll event
+    $scroller.unbind('scroll');
+    $scroller.scroll(handleScrolling);
 }
 
 function preparePage(resetScroll) {
