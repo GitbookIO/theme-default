@@ -8,7 +8,7 @@
             {% else %}
                 <span>
             {% endif %}
-                    {% if article.level != "0" and config.pluginsConfig['theme-default'].showLevel %}
+                    {% if article.level != "0" and config.pluginsConfig['theme-arangodb'].showLevel %}
                         <b>{{ article.level }}.</b>
                     {% endif %}
                     {{ article.title }}

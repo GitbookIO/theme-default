@@ -1,5 +1,6 @@
-# GitBook Default Theme
+# GitBook Theme for ArangoDB Docs
 
-This is the default theme for GitBook since version `3.0.0`. It can be used as a template for theming books or can be extended.
+This is the GitBook theme of the ArangoDB documentation,
+derived from Gitbook's `3.0.0` default theme.
 
-![Image](https://raw.github.com/GitbookIO/theme-default/master/preview.png)
+![Preview](https://raw.github.com/Simran-B/gitbook-plugin-theme-arangodb/master/preview.png)

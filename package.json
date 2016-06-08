@@ -1,6 +1,6 @@
 {
-  "name": "gitbook-plugin-theme-default",
-  "description": "Default theme for GitBook",
+  "name": "gitbook-plugin-theme-arangodb",
+  "description": "ArangoDB Docs theme for GitBook",
   "main": "./index.js",
   "version": "1.0.4",
   "engines": {
@@ -25,14 +25,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GitbookIO/theme-default.git"
+    "url": "https://github.com/Simran-B/gitbook-plugin-theme-arangodb.git"
   },
-  "author": "FriendCode Inc. <contact@gitbook.com>",
+  "author": "Simran Brucherseifer <simran@arangodb.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/GitbookIO/theme-default/issues"
+    "url": "https://github.com/Simran-B/gitbook-plugin-theme-arangodb/issues"
   },
   "contributors": [
+    {
+      "name": "FriendCode Inc.",
+      "email": "contact@gitbook.com"
+    },
     {
       "name": "Samy Pessé",
       "email": "samy@gitbook.com"
