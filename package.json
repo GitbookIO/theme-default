@@ -20,9 +20,6 @@
     "mousetrap": "1.5.3",
     "uglify-js": "2.6.1"
   },
-  "scripts": {
-    "prepublish": "./src/build.sh"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Simran-B/gitbook-plugin-theme-arangodb.git"
