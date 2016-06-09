@@ -30,7 +30,9 @@ function init() {
     });
     
     $("#navmenu > li > a:lt(3)").each(function() {
-        this.href = this.href.replace("ROOT_PATH/", gitbook.state.root + "../");
+        var root = gitbook.state.root.slice(0, -1).split("/");
+        root.splice(-1, 1, this.href, "");
+        this.href = root.join("/");
     });
 }
 
