@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  gitbook.events.on('start', function() {
+    $("#navmenu > li > a:lt(3)").each(function() {
+      this.href = this.href.replace("BASE_PATH/", gitbook.state.root);
+    });
+  });
+</script>
 <div id="header">
   <div id="logo">
     <a href="https://arangodb.com/">
@@ -25,13 +32,13 @@
   </div>
   <ul id="navmenu">
     <li class="active-tab">
-      <a href="{{ book.root + '../Manual' }}">Manual</a>
+      <a href="BASE_PATH/../Manual">Manual</a>
     </li>
     <li>
-      <a href="{{ book.root + '../AQL' }}">AQL</a>
+      <a href="BASE_PATH/../AQL}}">AQL</a>
     </li>
     <li>
-      <a href="{{ book.root + '../HTTP' }}">HTTP</a>
+      <a href="BASE_PATH/../HTTP">HTTP</a>
     </li>
     <li>
       <a href="https://docs.arangodb.com/cookbook">Cookbook</a>
