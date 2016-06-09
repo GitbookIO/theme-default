@@ -30,7 +30,7 @@ function init() {
     });
     
     $("#navmenu > li > a:lt(3)").each(function() {
-        this.href = this.href.replace("BASE_PATH/", gitbook.state.root);
+        this.href = this.href.replace("ROOT_PATH/", gitbook.state.root + "../");
     });
 }
 
