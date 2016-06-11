@@ -1,8 +1,10 @@
 .markdown-section {
     .gitbook-markdown(@md-color: @content-color, @md-line-height: @content-line-height);
 
-    .glossary-term {
+    .glossary-term, .glossary-term:hover {
+        color: desaturate(@content-color, 50%);
         cursor: help;
         text-decoration: underline;
+        text-decoration-style: dashed;
     }
 }
