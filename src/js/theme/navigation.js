@@ -331,9 +331,13 @@ function preparePage(resetScroll) {
     // Focus on content
     $pageWrapper.focus();
 
+    // Get scroller
+    var $scroller = getScroller();
+
     // Reset scroll
-    if (resetScroll !== false) $bookInner.scrollTop(0);
-    $bookBody.scrollTop(0);
+    if (resetScroll !== false) {
+        $scroller.scrollTop(0);
+    }
 
     // Get current page summary chapters
     $chapters = $('.book-summary .summary .chapter')
@@ -354,7 +358,6 @@ function preparePage(resetScroll) {
     });
 
     // Bind scrolling if summary contains more than one link to this page
-    var $scroller = getScroller();
     if ($chapters.length > 1) {
         $scroller.scroll(handleScrolling);
     }
@@ -428,7 +431,7 @@ function init() {
     $(window).resize(updateNavigationPosition);
 
     // Prepare current page
-    preparePage();
+    preparePage(false);
 }
 
 module.exports = {
