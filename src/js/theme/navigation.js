@@ -98,10 +98,17 @@ function setChapterActive($chapter, hash) {
 
     // If hash is provided, set as active chapter
     if (!!hash) {
-        $chapter = $chapters.filter(function() {
-            var titleId = getChapterHash($(this));
-            return titleId == hash;
-        }).first();
+        // Multiple chapters for this file
+        if ($chapters.length > 1) {
+            $chapter = $chapters.filter(function() {
+                var titleId = getChapterHash($(this));
+                return titleId == hash;
+            }).first();
+        }
+        // Only one chapter, no need to search
+        else {
+            $chapter = $chapters.first();
+        }
     }
 
     // Don't update current chapter
