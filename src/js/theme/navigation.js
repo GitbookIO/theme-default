@@ -351,6 +351,10 @@ function preparePage(resetScroll) {
     if ($chapters.length > 1) {
         $scroller.scroll(handleScrolling);
     }
+    // Else, only one chapter, set as active
+    else {
+        $activeChapter = $chapters.first();
+    }
 }
 
 function isLeftClickEvent(e) {
