@@ -361,7 +361,7 @@ function preparePage(resetScroll) {
     if ($chapters.length > 1) {
         $scroller.scroll(handleScrolling);
     }
-    // Else, only one chapter, set as active
+    // Else, set only chapter in summary as active
     else {
         $activeChapter = $chapters.first();
     }
