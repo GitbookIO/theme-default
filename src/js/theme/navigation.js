@@ -130,6 +130,7 @@ function setChapterActive($chapter, hash) {
         uri = window.location.pathname + hash;
 
     if (uri != oldUri) {
+        uri = uri.replace(/(\/[A-Z]:)+/, '');
         history.replaceState({ path: uri }, null, uri);
     }
 }
