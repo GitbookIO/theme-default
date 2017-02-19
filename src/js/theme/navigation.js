@@ -142,7 +142,19 @@ function setChapterActive($chapter, hash) {
 // Return the hash of link for a chapter
 function getChapterHash($chapter) {
     var $link = $chapter.children('a'),
-        hash = $link.attr('href').split('#')[1];
+        hash,
+        href,
+        parts;
+
+    if ($link.length) {
+        href = $link.attr('href')
+        if (href) {
+            parts = href.split('#');
+            if (parts.length>1) {
+                hash = parts[1];
+            }
+        }
+    }
 
     if (hash) hash = '#'+hash;
     return (!!hash)? hash : '';
