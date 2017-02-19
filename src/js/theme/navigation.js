@@ -69,12 +69,17 @@ function getElementTopPosition(id) {
         $parent    = $el.offsetParent(),
         dest       = 0;
 
-    dest = $el.position().top;
+    if ($el.length <= 0) {
+        dest = 0
+    } else {
 
-    while (!$parent.is($container)) {
-        $el = $parent;
-        dest += $el.position().top;
-        $parent = $el.offsetParent();
+        dest = $el.position().top;
+
+        while (!$parent.is($container)) {
+            $el = $parent;
+            dest += $el.position().top;
+            $parent = $el.offsetParent();
+        }
     }
 
     // Return rounded value since
