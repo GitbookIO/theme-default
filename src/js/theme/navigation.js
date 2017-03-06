@@ -69,12 +69,17 @@ function getElementTopPosition(id) {
         $parent    = $el.offsetParent(),
         dest       = 0;
 
-    dest = $el.position().top;
+    if ($el.length <= 0) {
+        dest = 0
+    } else {
 
-    while (!$parent.is($container)) {
-        $el = $parent;
-        dest += $el.position().top;
-        $parent = $el.offsetParent();
+        dest = $el.position().top;
+
+        while (!$parent.is($container)) {
+            $el = $parent;
+            dest += $el.position().top;
+            $parent = $el.offsetParent();
+        }
     }
 
     // Return rounded value since
@@ -137,7 +142,19 @@ function setChapterActive($chapter, hash) {
 // Return the hash of link for a chapter
 function getChapterHash($chapter) {
     var $link = $chapter.children('a'),
-        hash = $link.attr('href').split('#')[1];
+        hash,
+        href,
+        parts;
+
+    if ($link.length) {
+        href = $link.attr('href')
+        if (href) {
+            parts = href.split('#');
+            if (parts.length>1) {
+                hash = parts[1];
+            }
+        }
+    }
 
     if (hash) hash = '#'+hash;
     return (!!hash)? hash : '';
