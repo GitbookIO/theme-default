@@ -1,6 +1,6 @@
 /**
  *
- * @source: https://github.com/Uptwinkles/gitbook-theme-librejs/blob/master/src/js/theme/index.js
+ * @source: https://github.com/GitbookIO/theme-default/blob/master/src/js/theme/index.js
  *
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
