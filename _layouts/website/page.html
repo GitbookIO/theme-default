@@ -75,10 +75,12 @@
     </div>
 
     <script>
+        // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public-Domain
         var gitbook = gitbook || [];
         gitbook.push(function() {
             gitbook.page.hasChanged({{ template.getJSContext()|dump|safe }});
         });
+        /* @license-end */
     </script>
 </div>
 {% endblock %}
