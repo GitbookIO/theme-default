@@ -71,9 +71,9 @@ function getElementTopPosition(id) {
 
     dest = $el.position().top;
 
-    while (!$parent.is($container)) {
+    while ($parent && $parent.length && !$parent.is($container)) {
         $el = $parent;
-        dest += $el.position().top;
+        dest += ($el.position() || {}).top || 0;
         $parent = $el.offsetParent();
     }
 
