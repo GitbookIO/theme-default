@@ -259,7 +259,7 @@ function handleNavigation(relativeUrl, push) {
                 var responseURL = xhr.getResponseHeader('X-Current-Location') || uri;
 
                 // Replace html content
-                html = html.replace( /<(\/?)(html|head|body)([^>]*)>/ig, function(a,b,c,d){
+                html = html.replace( /<(\/?)(html|head|body)[>\s]([^>]*)>?/ig, function(a,b,c,d){
                     return '<' + b + 'div' + ( b ? '' : ' data-element="' + c + '"' ) + d + '>';
                 });
 
