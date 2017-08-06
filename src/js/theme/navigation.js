@@ -384,7 +384,8 @@ function preparePage(resetScroll) {
         }
 
         var resolvedRef = url.resolve(window.location.pathname, href);
-        return window.location.pathname == resolvedRef;
+        return decodeURI(window.location.pathname) == decodeURI(resolvedRef);
+        /* See https://github.com/GitbookIO/gitbook/issues/1525 */
     });
 
     // Bind scrolling if summary contains more than one link to this page
