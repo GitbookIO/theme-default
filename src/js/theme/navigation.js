@@ -323,6 +323,9 @@ function handleNavigation(relativeUrl, push) {
                 }
 
                 deferred.resolve();
+            },
+            error: function(html, status, error) {
+                deferred.reject();
             }
         });
     }).promise();
@@ -331,7 +334,7 @@ function handleNavigation(relativeUrl, push) {
         promise
         .fail(function (e) {
             console.log(e); // eslint-disable-line no-console
-            // location.href = relativeUrl;
+            location.href = relativeUrl;
         })
     );
 }
