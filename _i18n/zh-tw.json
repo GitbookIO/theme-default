@@ -9,6 +9,8 @@
     "SUMMARY_TOGGLE": "目錄",
     "SEARCH_TOGGLE": "搜尋",
     "SEARCH_PLACEHOLDER": "輸入並搜尋",
+    "SEARCH_RESULTS_TITLE": "<span class='search-results-count'></span> 個搜索結果 \"<span class='search-query'></span>\"",
+    "SEARCH_NO_RESULTS_TITLE": "0 個搜索結果 \"<span class='search-query'></span>\"",      
     "FONTSETTINGS_TOGGLE": "字型設定",
     "SHARE_TOGGLE": "分享",
     "SHARE_ON": "分享到 {{platform}}",
