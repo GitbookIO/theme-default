@@ -11,17 +11,35 @@
     "browserify": "13.1.0",
     "eslint": "3.6.1",
     "font-awesome": "4.6.3",
-    "preboot": "git+https://github.com/mdo/preboot.git#4aab4edd85f076d50609cbe28e4fe66cc0771701",
     "gitbook-logos": "git+https://github.com/GitbookIO/logos.git#2.0.2",
     "gitbook-markdown-css": "1.0.1",
     "jquery": "3.1.1",
     "less": "2.7.1",
     "less-plugin-clean-css": "1.5.1",
     "mousetrap": "1.6.0",
+    "npm-build-tools": "^2.2.5",
+    "preboot": "git+https://github.com/mdo/preboot.git#4aab4edd85f076d50609cbe28e4fe66cc0771701",
     "uglify-js": "2.7.3"
   },
   "scripts": {
-    "prepublish": "./src/build.sh"
+    "prepublish": "npm run build",
+
+    "build-clean": "n-clean _assets",
+    "build-core-js": "browserify src/js/core/index.js | uglifyjs -mc | n-pipe _assets/website/gitbook.js",
+    "build-theme-js": "browserify src/js/theme/index.js | uglifyjs -mc | n-pipe _assets/website/theme.js",
+    "build-website-css": "lessc -clean-css src/less/website.less _assets/website/style.css",
+    "build-ebook-css": "lessc -clean-css src/less/ebook.less _assets/ebook/ebook.css",
+    "build-pdf-css": "lessc -clean-css src/less/pdf.less _assets/ebook/pdf.css",
+    "build-mobi-css": "lessc -clean-css src/less/mobi.less _assets/ebook/mobi.css",
+    "build-epub-css": "lessc -clean-css src/less/epub.less _assets/ebook/epub.css",
+    "build-copy-fonts": "n-copy --source node_modules/font-awesome/fonts --destination _assets/website/fonts/fontawesome \"*\"",
+    "build-copy-favicon": "n-copy --source node_modules/gitbook-logos/output --destination _assets/website/images \"favicon.ico\"",
+    "build-copy-apple-icon": "n-concat --source node_modules/gitbook-logos/output/ \"apple-touch-icon-152.png\" | n-pipe _assets/website/images/apple-touch-icon-precomposed-152.png",
+
+    "build-js": "npm run build-core-js && npm run build-theme-js",
+    "build-css": "npm run build-website-css && npm run build-ebook-css && npm run build-pdf-css && npm run build-mobi-css && npm run build-epub-css",
+    "build-copy": "npm run build-copy-fonts && npm run build-copy-favicon && npm run build-copy-apple-icon",
+    "build": "npm run build-clean && npm run build-js && npm run build-css && npm run build-copy"
   },
   "repository": {
     "type": "git",
