@@ -232,7 +232,10 @@ function handleNavigation(relativeUrl, push) {
     // Is it an absolute url
     var isAbsolute = Boolean(uriParsed.hostname);
 
-    if (!usePushState || isAbsolute) {
+    // Is it a HTML file rather than an asset file (image, etc.)
+    var isHtml = /\.html$/.test(uriParsed.pathname);
+
+    if (!usePushState || isAbsolute || !isHtml) {
         // Refresh the page to the new URL if pushState not supported
         location.href = relativeUrl;
         return;
