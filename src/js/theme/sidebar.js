@@ -4,7 +4,7 @@ var platform = require('./platform');
 
 var gitbook = window.gitbook;
 
-// Toggle sidebar with or withour animation
+// Toggle sidebar with or without animation
 function toggleSidebar(_state, animation) {
     if (gitbook.state != null && isOpen() == _state) return;
     if (animation == null) animation = true;
