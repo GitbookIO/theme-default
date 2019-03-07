@@ -1,0 +1,22 @@
+{
+    "LANGS_CHOOSE": "Pilih bahasa",
+    "GLOSSARY": "Glosarium",
+    "GLOSSARY_INDEX": "Indeks",
+    "GLOSSARY_OPEN": "Glosarium",
+    "GITBOOK_LINK": "Dipublikasikan dengan GitBook",
+    "SUMMARY": "Daftar Isi",
+    "SUMMARY_INTRODUCTION": "Perkenalan",
+    "SUMMARY_TOGGLE": "Daftar Isi",
+    "SEARCH_TOGGLE": "Pencarian",
+    "SEARCH_PLACEHOLDER": "Ketik untuk mencari",
+    "SEARCH_RESULTS_TITLE": "<span class='search-results-count'></span> hasil yang cocok \"<span class='search-query'></span>\"",
+    "SEARCH_NO_RESULTS_TITLE": "Tidak ada hasil yang cocok \"<span class='search-query'></span>\"",
+    "FONTSETTINGS_TOGGLE": "Pengaturan Huruf",
+    "SHARE_TOGGLE": "Bagikan",
+    "SHARE_ON": "Bagikan di {{platform}}",
+    "FONTSETTINGS_WHITE": "Putih",
+    "FONTSETTINGS_SEPIA": "Sepia",
+    "FONTSETTINGS_NIGHT": "Malam",
+    "FONTSETTINGS_SANS": "Sans",
+    "FONTSETTINGS_SERIF": "Serif"
+}
