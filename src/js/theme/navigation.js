@@ -167,7 +167,7 @@ function setChapterActive($chapter, hash) {
 // Return the hash of link for a chapter
 function getChapterHash($chapter) {
     var $link = $chapter.children('a'),
-        hash = $link.attr('href').split('#')[1];
+        hash = ($link.attr('href')||"").split('#')[1];
 
     if (hash) hash = '#'+hash;
     return (!!hash)? hash : '';
@@ -380,7 +380,7 @@ function preparePage(resetScroll) {
             return false;
         }
         else {
-            href = $link.attr('href').split('#')[0];
+            href = ($link.attr('href')||"").split('#')[0];
         }
 
         var resolvedRef = url.resolve(window.location.pathname, href);
